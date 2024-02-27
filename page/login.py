@@ -3,7 +3,7 @@ from utility.shared import this
 import datetime
 
 def validateUser(user,passw):
-    print(f"User: {user} & Password: {passw}")
+    print(f"User: {user} & Password: {passw}\n")
     if len(user) != 0 :
         this.user = user
         this.userFileLoc = f"./database/{user}.bin"

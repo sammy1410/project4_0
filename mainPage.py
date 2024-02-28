@@ -2,13 +2,17 @@ from utility.shared import this
 import os
 import streamlit as st
 import page.Contact_us as Contact,page.Home as Home, page.product as product,page.SCADA as SCADA
-import page.login as login
+import page.SignIn as SignIn,page.SignUp as SignUp
+import page.accountInfo as accountInfo
+
 pages = {
     "Home": Home,
     "Contact": Contact,
     "Product": product,
     "SCADA": SCADA,
-    "Login": login
+    "My Account": accountInfo,
+    "Sign In": SignIn,
+    "Sign Up": SignUp
 }
 
 
@@ -17,19 +21,22 @@ def change_page(pageName):
     this.pageName=pageName
     
 def logout():
+    del this.user_session
     del this.user
     change_page("Home")
 
 def showNavMenu():
     st.image("./images/WebBanner.png",use_column_width=True)
-    pageNo = len(pages.keys())
-    columns = st.columns(pageNo)
     page_name=list(pages.keys())
+    page_name.remove("Sign Up")
+    page_name.remove("SCADA")
+    pageNo = len(page_name)
+    columns = st.columns(pageNo)
     if "user" in this:
-        page_name.remove("Login")
+        page_name.remove("Sign In")
         st.button("Logout",on_click=logout)
     else:
-        page_name.remove("SCADA")
+        page_name.remove("My Account")
     page_name.remove("Product")
     for col,page_ in zip(columns,page_name):
         with col:

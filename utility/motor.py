@@ -2,7 +2,7 @@ import time
 #import RPi.GPIO as GPIO
 from utility.shared import usleep
 import threading
-from utility.fileHandler import write_error,write_mesg,write_output
+from utility.fileHandler import write_error,write_mesg,SCADA_log
 from utility.shared import this
 
 motors = {
@@ -84,7 +84,7 @@ def motor_base():
         for tasks in base.task:
             #print(f"Base: {tasks}")
             base.rotate_motor(tasks,1000,1)
-            write_output(f"Base: {tasks}")
+            SCADA_log(f"Base: {tasks}")
             #base.task.remove(tasks)
         base.task.clear()
         base.event.clear()
@@ -99,7 +99,7 @@ def motor_shoulder():
         #print(f"Shoulder: {shoulder.task}")
         for tasks in shoulder.task:
             print(f"Shoulder: {tasks}")
-            write_output(f"Shoulder: {tasks}")
+            SCADA_log(f"Shoulder: {tasks}")
             shoulder.rotate_motor(tasks,1000,1)
         shoulder.task.clear()
         shoulder.event.clear()
@@ -113,7 +113,7 @@ def motor_elbow():
         elbow.event.wait()
         for tasks in elbow.task:
             print(f"Elbow: {tasks}")
-            write_output(f"Elbow: {tasks}")
+            SCADA_log(f"Elbow: {tasks}")
             elbow.rotate_motor(tasks,1000,1)
         elbow.task.clear()    
         elbow.event.clear()
@@ -126,7 +126,7 @@ def motor_wrist():
     while not wrist_roll.exit_thread:
         wrist_roll.event.wait()
         for tasks in wrist_roll.task:
-            write_output(f"Wrist Roll: {tasks}")
+            SCADA_log(f"Wrist Roll: {tasks}")
             wrist_roll.rotate_motor(tasks,1000,1)
         wrist_roll.task.clear()
         wrist_roll.event.clear()
@@ -139,7 +139,7 @@ def motor_end_pitch():
     while not end_pitch.exit_thread:
         end_pitch.event.wait()
         for tasks in end_pitch.task:
-            write_output(f"End Pitch: {tasks}")
+            SCADA_log(f"End Pitch: {tasks}")
             end_pitch.rotate_motor(tasks,1000,1)
         end_pitch.task.clear()
         end_pitch.event.clear()
@@ -152,7 +152,7 @@ def motor_end_yaw():
     while not end_yaw.exit_thread:
         end_yaw.event.wait()
         for tasks in end_yaw.task:
-            write_output(f"End Yaw: {tasks}")
+            SCADA_log(f"End Yaw: {tasks}")
             end_yaw.rotate_motor(tasks,1000,1)
         end_yaw.task.clear()
         end_yaw.event.clear()

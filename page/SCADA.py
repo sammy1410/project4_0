@@ -45,10 +45,6 @@ def layout():
     #   GPIO.cleanup()
     #  GPIO.setwarnings(False)
         motors_init()
-        
-        create_files()
-
-
         from utility.fileHandler import write_error,write_mesg,write_output
         this.output = write_output
         mesg="_________________________________"

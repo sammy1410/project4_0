@@ -1,58 +1,46 @@
-import datetime
+from utility.timestamp import timestamp
 
-error_logs = None
-msg_logs = None
-output_logs = None
+DB_PATH = "./database/"
+
+USER_DB = "./database/users.db"
+ORDER_DB = "./database/orders.db"
+
+def user_events_file(UID):
+    return f"{DB_PATH}UID{UID}/events.log"
+
+def user_orders_file(UID):
+    return f"{DB_PATH}UID{UID}/orders.db"
+
+def user_image(UID):
+    return f"{DB_PATH}UID{UID}/profile_pic.png"
+    
+
+def write_output(mesg):
+    with open("./logs/output.log","a") as output_logs:
+        output_logs.write(f"[{timestamp()}] : {mesg}\n")
+    
+def write_error(mesg):
+    with open("./logs/error.log","a") as error_logs:
+        error_logs.write(f"[{timestamp()}] : {mesg}\n")
+        
+def write_mesg(mesg):
+    with open("./logs/msg.log","a") as msg_logs:
+        msg_logs.write(f"[{timestamp()}] : {mesg}\n")
+
+def SCADA_log(mesg):
+    with open("./logs/SCADA.log","a") as SCADA_logs:
+        SCADA_logs.write(f"[{timestamp()}] : {mesg}\n")
 
 def create_files():
-    global error_logs,msg_logs,output_logs
-    error_logs=open("./logs/error.log","a")
-    msg_logs=open("./logs/msg.log","a")
-    output_logs=open("./logs/output.log","a")
     
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
     init_log=f"""
     --------------------------------
 
-    {timestamp} Program started
+    {timestamp()} Program started
     
     --------------------------------
     
     """
-    msg_logs.write(init_log)
-    output_logs.write(init_log)
-    error_logs.write(init_log)
-    output_logs.close()
-    msg_logs.close()
-    error_logs.close()
-    
-
-def write_output(mesg):
-    output_logs=open("./logs/output.log","a")
-
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-    formatted = f"[{timestamp}] : {mesg}\n"
-    output_logs.write(formatted)
-    
-    output_logs.close()
-    
-def write_error(mesg):
-    error_logs=open("./logs/error.log","a")
-
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-    formatted = f"[{timestamp}] : {mesg}\n"
-    error_logs.write(formatted)
-    
-    error_logs.close()
-        
-
-def write_mesg(mesg):
-    msg_logs=open("./logs/msg.log","a")
-
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-    formatted = f"[{timestamp}] : {mesg}\n"
-    msg_logs.write(formatted)
-
-    msg_logs.close()
-    
+    write_error(init_log)
+    write_mesg(init_log)
+    write_output(init_log)

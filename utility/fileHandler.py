@@ -5,6 +5,12 @@ DB_PATH = "./database/"
 USER_DB = "./database/users.db"
 ORDER_DB = "./database/orders.db"
 
+PRODUCT_DB = "./products/products.db"
+PRODUCT_PATH = "./products/"
+
+default_male = "./images/default_boy_profile.png"
+default_female= "./images/default_girl_profile.png"
+
 def user_events_file(UID):
     return f"{DB_PATH}UID{UID}/events.log"
 
@@ -13,7 +19,6 @@ def user_orders_file(UID):
 
 def user_image(UID):
     return f"{DB_PATH}UID{UID}/profile_pic.png"
-    
 
 def write_output(mesg):
     with open("./logs/output.log","a") as output_logs:

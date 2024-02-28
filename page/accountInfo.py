@@ -26,6 +26,3 @@ def layout():
         st.write(f'Phone: {this.user_session["phone"]}')
         st.write(f'Access Level: {this.user_session["access"]}')
         st.write(f'Password: {dots()}')
-
-        if this.user_session["access"] == "Admin":
-            st.button("SCADA",on_click=start_SCADA)

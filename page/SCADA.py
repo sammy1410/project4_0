@@ -12,7 +12,7 @@ def exit_threads():
             i.exit_thread=True
             i.event.set()
             i.thread.join()
-    this.pageName="Home"
+    this.pageName="Admin"
     print("Motors Exited")
 
 def update_motors():

@@ -33,6 +33,10 @@ def validateUser():
             this.user = this.user_session["first_name"]
             with open(user_events_file(this.user_session["ID"]),"a") as user_event:
                  user_event.write(f"User Logged In : {timestamp()}\n")
+            if this.user_session["access"] == "Admin":
+                this.pageName = "Admin"
+            else:
+                this.pageName = "Home"
     #if len(user) != 0 :
     #    this.user = user
     #    this.userFileLoc = f"./database/{user}.bin"
@@ -62,5 +66,5 @@ def layout():
         st.button("Create Account",on_click=toSignUp)
 
     else:
-        st.write(f"Welcome {this.user}")
+        this.pageName = "Home"
         pass

@@ -2,6 +2,7 @@ import streamlit as st
 from utility.shared import this
 import pickle
 import os
+import shutil
 from utility.timestamp import timestamp
 from utility.fileHandler import USER_DB,DB_PATH,user_events_file,user_orders_file,user_image
 
@@ -21,10 +22,13 @@ def validateNewUser():
             with open(f"{DB_PATH}userNo","r") as userCount:
                 this.userCount = int(userCount.readline())
             this.userCount += 1
+            with open(f"{DB_PATH}userNo","w") as userCount:
+                userCount.write(str(this.userCount))
             user_data = {
                 "ID": this.userCount,
                 "first_name": this.firstname_signup,
                 "last_name": this.lastname_signup,
+                "gender": this.gender_signup,
                 "email": this.email_signup,
                 "phone": this.phone_signup,
                 "pass": this.pass_signup,
@@ -42,11 +46,18 @@ def validateNewUser():
             
             with open(user_orders_file(user_data["ID"]),"w") as file:
                 pass
-            with open(user_image(user_data["ID"]),"w") as file:
-                pass
 
-            with open(f"{DB_PATH}userNo","w") as userCount:
-                userCount.write(str(this.userCount))
+            if this.profile_signup is not None:
+                with open(user_image(user_data["ID"]),"wb") as profile_img:
+                    profile_img.write(this.profile_signup.read())
+            else:
+                if this.gender_signup == "Female":
+                    from utility.fileHandler import default_female
+                    shutil.copy(default_female,f'{user_image(user_data["ID"])}')
+                else:
+                    from utility.fileHandler import default_male
+                    shutil.copy(default_male,f'{user_image(user_data["ID"])}')
+
             st.success("User Added! Sign In for more info.")  
             with st.spinner():
                 #time.sleep(3)
@@ -55,8 +66,10 @@ def validateNewUser():
                 del this.lastname_signup
                 del this.email_signup
                 del this.phone_signup
+                del this.gender_signup
                 del this.pass_signup
                 del this.access_signup
+                del this.profile_signup
             this.pageName="Sign In"
         else:
             st.error("User Already Exists. Proceed to Sign In.")
@@ -70,10 +83,12 @@ def layout():
             st.text_input("First Name",key="firstname_signup")
         with col2:
             st.text_input("Last Name",key="lastname_signup")
+        st.radio("Gender",("Male","Female","Others"),key="gender_signup")
         st.text_input("Email Address",key="email_signup")
         st.text_input("Phone No.",key="phone_signup")
         st.text_input("Password",type="password",key="pass_signup")
         st.radio("Access Level",("Admin","User"),key="access_signup")
+        st.file_uploader("Upload Profile Picture",type=["png","jpg","jpeg"],key="profile_signup")
         st.checkbox("I agree to Terms and Conditions.")
 
         st.form_submit_button("Sign Up",on_click=validateNewUser)

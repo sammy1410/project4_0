@@ -3,8 +3,7 @@ import pandas as pd
 import numpy as np
 
 def layout():
-    st.header('Contact Us', divider='rainbow')
-    st.subheader("About Us")
+    st.header('About Us', divider='rainbow')
     col1, col2= st.columns(2)
     with col1:
         st.image("./images/abhisek.jpg",caption="Abhisek Chaudary (076BME001)")
@@ -13,7 +12,6 @@ def layout():
     with col2:
         st.image("./images/gangu.jpg",caption="Gangotri Sah (076BME012)")
         st.image("./images/sneha.jpg",caption="Sneha Poudel (076BME042)")
-        
         pass
     
     st.subheader("OUR HEADQUARTER")

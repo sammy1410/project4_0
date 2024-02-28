@@ -1,6 +1,6 @@
 import pickle
 
-from utility.fileHandler import USER_DB
+from utility.fileHandler import USER_DB,PRODUCT_DB,PRODUCT_PATH
 
 with open(USER_DB,"w") as file:
     while True:

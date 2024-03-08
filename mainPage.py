@@ -6,6 +6,9 @@ import page.SignIn as SignIn,page.SignUp as SignUp
 import page.accountInfo as accountInfo,page.Admin_page as Admin
 import page.addProduct as New_Product
 import page.addUser as New_User
+import page.Accessdenied as accessdenied
+import page.Errorpage as errorpage
+
 
 admin_pages = {
     "Admin": Admin,
@@ -13,7 +16,7 @@ admin_pages = {
     "SCADA": SCADA,
     "My Account": accountInfo,
     "New_Product":New_Product,
-    "New_User" : New_User
+    #"New_User":New_User
 }
 
 user_pages = {
@@ -95,10 +98,13 @@ else:
             try:
                 this.page = admin_pages[this.pageName]
             except:
-                pass
+                this.page= accessdenied   
         else:
             showUserNavMenu()    
-            this.page = user_pages[this.pageName]
+            try:
+                this.page = user_pages[this.pageName]
+            except:
+                this.page=errorpage
     else:
         showGuestNavMenu()
         this.page = guest_pages[this.pageName]

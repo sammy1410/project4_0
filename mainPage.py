@@ -10,6 +10,7 @@ import page.Accessdenied as accessdenied
 import page.Errorpage as errorpage
 
 
+
 admin_pages = {
     "Admin": Admin,
     "Product": product,
@@ -107,6 +108,10 @@ else:
     else:
         showGuestNavMenu()
         this.page = guest_pages[this.pageName]
+        try:
+            this.page = user_pages[this.pageName]
+        except:
+            this.page=errorpage
     
     this.page.layout()
     #hfdklg;lf;lf

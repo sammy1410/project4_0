@@ -1,6 +1,7 @@
 import streamlit as st
 import os, shutil
 import pickle
+from utility.timestamp import timecode
 from utility.shared import this
 from utility.fileHandler import PRODUCT_DB,PRODUCT_NO, PRODUCT_PATH, product_data, product_image, product_info
 
@@ -14,7 +15,7 @@ def productAdd():
             with open(f"{PRODUCT_NO}","w") as productCount:
                 productCount.write(str(this.productCount))
             product_data = {
-                    "ID": this.productCount,
+                    "ID": timecode(),
                     "Name": this.product_name
             }
             pickle.dump(product_data,product_database)

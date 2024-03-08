@@ -3,7 +3,7 @@ from utility.shared import this
 import pickle
 import os
 import shutil
-from utility.timestamp import timestamp
+from utility.timestamp import timestamp,timecode
 from utility.fileHandler import USER_DB,DB_PATH,user_events_file,user_orders_file,user_image
 from utility.fileHandler import USER_NO,USER_PATH
 
@@ -27,7 +27,7 @@ def validateNewUser():
             with open(f"{USER_NO}","w") as userCount:
                 userCount.write(str(this.userCount))
             user_data = {
-                "ID": this.userCount,
+                "ID": timecode(),
                 "first_name": this.firstname_signup,
                 "last_name": this.lastname_signup,
                 "gender": this.gender_signup,

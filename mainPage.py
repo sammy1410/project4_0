@@ -12,6 +12,7 @@ import page.Errorpage as errorpage
 
 admin_pages = {
     "Admin": Admin,
+    "Home" : Home,
     "Product": product,
     "SCADA": SCADA,
     "My Account": accountInfo,

@@ -11,6 +11,7 @@ USER_NO = "./database/userNo"
 
 USER_PATH = "./database/users/"
 PRODUCT_PATH = "./database/products/"
+TMP_PATH = "./tmp/"
 
 default_male = "./images/default_boy_profile.png"
 default_female= "./images/default_girl_profile.png"

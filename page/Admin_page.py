@@ -12,29 +12,36 @@ def change_page(page):
 def layout():
     st.header("Admin Page")
 
+    tabs = ["Users Database","Product Database"]
+    ans = st.radio("Select Tab", tabs)
+
+
     ## Create a table showing all the data
     table = list()
-    table_head = ["ID", "First Name", "Last Name", "Gender","Email", "Phone","Password","Access"]
-    ans = st.selectbox("Database",("Users Database","Product Database"))
+    #ans = st.selectbox("Database",("Users Database","Product Database"))
     if ans == "Users Database":
+        st.button("Add new User",on_click=change_page,args=("New_User",))
         with open(USER_DB,"rb") as users:
             while True:
                 try:
                     dt = pickle.load(users)
                     #table = {**table,**dt}
+                    dt.pop("ID",None)
+                    dt.pop("pass",None)
                     table.append(dt)
                 except EOFError:
                     break
         st.table(table)  
-        st.button("Add new User",on_click=change_page,args=("New_User",))     
-
+        
     if ans == "Product Database":
+        st.button("Add new Product",on_click=change_page,args=("New_Product",))     
         with open(PRODUCT_DB,"rb") as users:
             while True:
                 try:
                     dt = pickle.load(users)
+                    dt.pop("ID",None)
                     table.append(dt)
                 except EOFError:
                     break
         st.table(table)       
-        st.button("Add new Product",on_click=change_page,args=("New_Product",))     
+        

@@ -76,6 +76,8 @@ def validateNewUser():
     else:
         st.error("User Already Exists. Proceed to Sign In.")
 
+def change_page(page):
+    this.pageName = page
 
 def layout():
     st.write("Sign Up")
@@ -96,4 +98,4 @@ def layout():
         st.form_submit_button("Sign Up",on_click=validateNewUser)
     st.write("____________________")
     st.text("I'm already a member!")
-    st.button("Sign In",on_click=validateNewUser,args=("Sign In",))    
+    st.button("Sign In",on_click=change_page,args=("Sign In",))    

@@ -6,6 +6,7 @@ DB_PATH = "./database/"
 USER_DB = "./database/users.db"
 ORDER_DB = "./database/orders.db"
 PRODUCT_DB = "./database/products.db"
+PRODUCT_NO = "./database/productNo"
 USER_NO = "./database/userNo"
 
 USER_PATH = "./database/users/"
@@ -13,6 +14,8 @@ PRODUCT_PATH = "./database/products/"
 
 default_male = "./images/default_boy_profile.png"
 default_female= "./images/default_girl_profile.png"
+default_product= "./images/default_product.png"
+
 
 def user_events_file(UID):
     return f"{USER_PATH}UID{UID}/events.log"
@@ -25,6 +28,7 @@ def user_image(UID):
 
 def product_image(PID):
     return f"{PRODUCT_PATH}PID{PID}/image.jpg"
+
 def product_info(PID):
     return f"{PRODUCT_PATH}PID{PID}/infoFile"
 

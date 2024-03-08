@@ -6,7 +6,7 @@ DB_PATH = "./database/"
 USER_DB = "./database/users.db"
 ORDER_DB = "./database/orders.db"
 PRODUCT_DB = "./database/products.db"
-USER_NO = "./database/usesNo"
+USER_NO = "./database/userNo"
 
 USER_PATH = "./database/users/"
 PRODUCT_PATH = "./database/products/"

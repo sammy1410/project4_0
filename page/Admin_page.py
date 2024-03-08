@@ -9,7 +9,6 @@ def change_page(page):
     this.pageName=page
     print(f"Change Page: {this.pageName}")
 
-
 def layout():
     st.header("Admin Page")
 

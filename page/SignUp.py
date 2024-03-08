@@ -5,10 +5,12 @@ import os
 import shutil
 from utility.timestamp import timestamp
 from utility.fileHandler import USER_DB,DB_PATH,user_events_file,user_orders_file,user_image
+from utility.fileHandler import USER_NO,USER_PATH
 
 def validateNewUser():
     print(f"""New User Entry: {this.email_signup}""")
     user_exists = False
+    
     with open(USER_DB,"rb") as file:
         while True:
             try:
@@ -17,12 +19,12 @@ def validateNewUser():
                     user_exists = True
             except EOFError:
                 break
-    with open(USER_DB,"ab") as file:
-        if not user_exists:
-            with open(f"{DB_PATH}userNo","r") as userCount:
+    if not user_exists:
+        with open(USER_DB,"ab") as file:
+            with open(f"{USER_NO}","r") as userCount:
                 this.userCount = int(userCount.readline())
             this.userCount += 1
-            with open(f"{DB_PATH}userNo","w") as userCount:
+            with open(f"{USER_NO}","w") as userCount:
                 userCount.write(str(this.userCount))
             user_data = {
                 "ID": this.userCount,
@@ -35,7 +37,7 @@ def validateNewUser():
                 "access": this.access_signup
             }
             pickle.dump(user_data,file)
-            os.makedirs(f"{DB_PATH}UID{user_data['ID']}")
+            os.makedirs(f"{USER_PATH}UID{user_data['ID']}")
             
             with open(user_events_file(user_data["ID"]),"w") as file:
                 file.write(f"""
@@ -71,9 +73,9 @@ def validateNewUser():
                 del this.access_signup
                 del this.profile_signup
             this.pageName="Sign In"
-        else:
-            st.error("User Already Exists. Proceed to Sign In.")
-    
+    else:
+        st.error("User Already Exists. Proceed to Sign In.")
+
 
 def layout():
     st.write("Sign Up")

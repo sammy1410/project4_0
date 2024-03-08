@@ -12,7 +12,8 @@ admin_pages = {
     "Product": product,
     "SCADA": SCADA,
     "My Account": accountInfo,
-    "New_Product":New_Product
+    "New_Product":New_Product,
+    "New_User":New_User
 }
 
 user_pages = {

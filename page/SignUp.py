@@ -3,7 +3,7 @@ from utility.shared import this
 import pickle
 import os
 import shutil
-from utility.timestamp import timestamp
+from utility.timestamp import timestamp,timecode
 from utility.fileHandler import USER_DB,DB_PATH,user_events_file,user_orders_file,user_image
 from utility.fileHandler import USER_NO,USER_PATH
 
@@ -27,7 +27,7 @@ def validateNewUser():
             with open(f"{USER_NO}","w") as userCount:
                 userCount.write(str(this.userCount))
             user_data = {
-                "ID": this.userCount,
+                "ID": timecode(),
                 "first_name": this.firstname_signup,
                 "last_name": this.lastname_signup,
                 "gender": this.gender_signup,
@@ -75,8 +75,9 @@ def validateNewUser():
             this.pageName="Sign In"
     else:
         st.error("User Already Exists. Proceed to Sign In.")
-        #Sameerpabo
 
+def change_page(page):
+    this.pageName = page
 
 def layout():
     st.write("Sign Up")
@@ -97,4 +98,4 @@ def layout():
         st.form_submit_button("Sign Up",on_click=validateNewUser)
     st.write("____________________")
     st.text("I'm already a member!")
-    st.button("Sign In",on_click=validateNewUser,args=("Sign In",))    
+    st.button("Sign In",on_click=change_page,args=("Sign In",))    

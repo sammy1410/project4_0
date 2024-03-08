@@ -13,6 +13,7 @@ import page.Errorpage as errorpage
 
 admin_pages = {
     "Admin": Admin,
+    "Home" : Home,
     "Product": product,
     "SCADA": SCADA,
     "My Account": accountInfo,
@@ -95,6 +96,7 @@ else:
         if this.user_session["access"] == "Admin":
             if this.pageName != "SCADA":
                 showAdminNavMenu()
+            #this.page = admin_pages[this.pageName]
             try:
                 this.page = admin_pages[this.pageName]
             except:
@@ -114,4 +116,3 @@ else:
             this.page=errorpage
     
     this.page.layout()
-    #hfdklg;lf;lf

@@ -1,14 +1,15 @@
-import pickle
+import streamlit as st
+import pandas as pd
 
-from utility.fileHandler import USER_DB,PRODUCT_DB,PRODUCT_PATH
+# Sample data
+data = {
+    'Name': ['John', 'Alice', 'Bob'],
+    'Age': [30, 25, 35],
+    'Location': ['New York', 'Paris', 'London']
+}
 
-with open(USER_DB,"w") as file:
-    while True:
-        try:
-            break
-            pass
-            #this = pickle.load(file)
-            #print(this)
-            #print(this["Email"])
-        except EOFError:
-            break
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Display table
+st.table(df)

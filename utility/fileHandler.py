@@ -1,24 +1,45 @@
 from utility.timestamp import timestamp
+import pickle
 
 DB_PATH = "./database/"
 
 USER_DB = "./database/users.db"
 ORDER_DB = "./database/orders.db"
+PRODUCT_DB = "./database/products.db"
+USER_NO = "./database/usesNo"
 
-PRODUCT_DB = "./products/products.db"
-PRODUCT_PATH = "./products/"
+USER_PATH = "./database/users/"
+PRODUCT_PATH = "./database/products/"
 
 default_male = "./images/default_boy_profile.png"
 default_female= "./images/default_girl_profile.png"
 
 def user_events_file(UID):
-    return f"{DB_PATH}UID{UID}/events.log"
+    return f"{USER_PATH}UID{UID}/events.log"
 
 def user_orders_file(UID):
-    return f"{DB_PATH}UID{UID}/orders.db"
+    return f"{USER_PATH}UID{UID}/orders.db"
 
 def user_image(UID):
-    return f"{DB_PATH}UID{UID}/profile_pic.png"
+    return f"{USER_PATH}UID{UID}/profile_pic.png"
+
+def product_image(PID):
+    return f"{PRODUCT_PATH}PID{PID}/image.jpg"
+def product_info(PID):
+    return f"{PRODUCT_PATH}PID{PID}/infoFile"
+
+def product_data(pid):
+    product_entry=None
+    with open(PRODUCT_DB,"rb") as product_db:
+        while True:
+            try:
+                entry= pickle.load(product_db)
+                if entry["ID"] == pid:
+                    product_entry = entry
+                    break
+            except EOFError:
+                break
+    return product_entry
 
 def write_output(mesg):
     with open("./logs/output.log","a") as output_logs:

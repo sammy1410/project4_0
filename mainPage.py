@@ -4,12 +4,15 @@ import streamlit as st
 import page.Contact_us as Contact,page.Home as Home, page.product as product,page.SCADA as SCADA
 import page.SignIn as SignIn,page.SignUp as SignUp
 import page.accountInfo as accountInfo,page.Admin_page as Admin
+import page.addProduct as New_Product
+import page.addUser as New_User
 
 admin_pages = {
     "Admin": Admin,
     "Product": product,
     "SCADA": SCADA,
     "My Account": accountInfo,
+    "New_Product":New_Product
 }
 
 user_pages = {
@@ -24,6 +27,7 @@ guest_pages = {
     "Contact": Contact,
     "Product": product,
     "Sign In": SignIn,
+    "Sign Up":SignUp
 }
 
 def change_page(pageName):
@@ -35,11 +39,11 @@ def logout():
     del this.user
     change_page("Home")
 
-
 def showAdminNavMenu():
     st.image("./images/WebBanner.png",use_column_width=True)
     page_name=list(admin_pages.keys())
     page_name.remove("Product")
+    page_name.remove("New_Product")
 
     pageNo = len(page_name)
     columns = st.columns(pageNo)
@@ -67,7 +71,7 @@ def showGuestNavMenu():
     st.image("./images/WebBanner.png",use_column_width=True)
     page_name=list(guest_pages.keys())
     page_name.remove("Product")
-
+    page_name.remove("Sign Up")
     pageNo = len(page_name)
     columns = st.columns(pageNo)
     
@@ -86,11 +90,15 @@ else:
         if this.user_session["access"] == "Admin":
             if this.pageName != "SCADA":
                 showAdminNavMenu()
-            this.page = admin_pages[this.pageName]    
+            try:
+                this.page = admin_pages[this.pageName]
+            except:
+                pass    
         else:
             showUserNavMenu()    
             this.page = user_pages[this.pageName]
     else:
         showGuestNavMenu()
         this.page = guest_pages[this.pageName]
+    
     this.page.layout()

@@ -13,7 +13,7 @@ admin_pages = {
     "SCADA": SCADA,
     "My Account": accountInfo,
     "New_Product":New_Product,
-    "New_User":New_User
+    "New_User" : New_User
 }
 
 user_pages = {
@@ -91,10 +91,11 @@ else:
         if this.user_session["access"] == "Admin":
             if this.pageName != "SCADA":
                 showAdminNavMenu()
+            #this.page = admin_pages[this.pageName]
             try:
                 this.page = admin_pages[this.pageName]
             except:
-                pass    
+                pass
         else:
             showUserNavMenu()    
             this.page = user_pages[this.pageName]

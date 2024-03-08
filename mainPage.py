@@ -8,6 +8,7 @@ import page.addProduct as New_Product
 import page.addUser as New_User
 import page.Accessdenied as accessdenied
 import page.Errorpage as errorpage
+import page.Order as order
 
 
 
@@ -26,6 +27,7 @@ user_pages = {
     "Contact": Contact,
     "Product": product,
     "My Account": accountInfo,
+    "Order": order
 }
 
 guest_pages = {
@@ -111,7 +113,7 @@ else:
         showGuestNavMenu()
         this.page = guest_pages[this.pageName]
         try:
-            this.page = user_pages[this.pageName]
+            this.page = guest_pages[this.pageName]
         except:
             this.page=errorpage
     

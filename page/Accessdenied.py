@@ -2,7 +2,7 @@ import streamlit as st
 from utility.shared import this
 
 def pagechange():
-    this.pageName="Admin"
+    this.pageName="Home"
     print("page changed.")
 
 

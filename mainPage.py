@@ -1,5 +1,6 @@
 from utility.shared import this
 import os
+from utility.fileHandler import user_orders_file
 import streamlit as st
 import page.Contact_us as Contact,page.Home as Home, page.product as product,page.SCADA as SCADA
 import page.SignIn as SignIn,page.SignUp as SignUp
@@ -43,8 +44,12 @@ def change_page(pageName):
     this.pageName=pageName
     
 def logout():
+    #if os.path.getsize(user_orders_file(this.user_session["ID"])) > 0:
+        #with open(user_orders_file(this.user_session["ID"]), "w"):
+           #pass
     del this.user_session
     del this.user
+
     change_page("Home")
 
 def showAdminNavMenu():

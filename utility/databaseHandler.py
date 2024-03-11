@@ -1,5 +1,5 @@
 from utility.fileHandler import PRODUCT_DB, PRODUCT_PATH, PRODUCT_NO
-from utility.fileHandler import USER_PATH,USER_DB,USER_NO,user_orders_file
+from utility.fileHandler import USER_PATH,USER_DB,USER_NO,user_orders_file,ORDER_DB,user_orderplaced_file
 from utility.fileHandler import TMP_PATH
 from utility.shared import this
 import pickle,shutil
@@ -101,7 +101,6 @@ def showUsers():
     st.table(table)  
 
 def showOrders():
-
     table = list()
     with open(user_orders_file(this.user_session["ID"]),"rb") as orders:
         while True:
@@ -109,6 +108,20 @@ def showOrders():
                 dt = pickle.load(orders)
                 #table = {**table,**dt}
                 #dt.pop("ID",None)
+                #dt.pop("pass",None)
+                table.append(dt)
+            except EOFError:
+                break
+    st.table(table) 
+
+def showOrderplaced():
+    table = list()
+    with open(user_orderplaced_file(this.user_session["ID"]),"rb") as orders:
+        while True:
+            try:
+                dt = pickle.load(orders)
+                #table = {**table,**dt}
+                dt.pop("userid",None)
                 #dt.pop("pass",None)
                 table.append(dt)
             except EOFError:

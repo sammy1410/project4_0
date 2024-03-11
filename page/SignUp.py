@@ -4,7 +4,7 @@ import pickle
 import os
 import shutil
 from utility.timestamp import timestamp,timecode
-from utility.fileHandler import USER_DB,DB_PATH,user_events_file,user_orders_file,user_image
+from utility.fileHandler import USER_DB,DB_PATH,user_events_file,user_orders_file,user_image,user_orderplaced_file
 from utility.fileHandler import USER_NO,USER_PATH
 
 def validateNewUser():
@@ -47,6 +47,9 @@ def validateNewUser():
                 """)
             
             with open(user_orders_file(user_data["ID"]),"w") as file:
+                pass
+
+            with open(user_orderplaced_file(user_data["ID"]),"w") as file:
                 pass
 
             if this.profile_signup is not None:

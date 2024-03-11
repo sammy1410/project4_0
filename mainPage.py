@@ -44,9 +44,6 @@ def change_page(pageName):
     this.pageName=pageName
     
 def logout():
-    #if os.path.getsize(user_orders_file(this.user_session["ID"])) > 0:
-        #with open(user_orders_file(this.user_session["ID"]), "w"):
-           #pass
     del this.user_session
     del this.user
 

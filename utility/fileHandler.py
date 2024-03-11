@@ -24,6 +24,10 @@ def user_events_file(UID):
 def user_orders_file(UID):
     return f"{USER_PATH}UID{UID}/orders.db"
 
+def user_orderplaced_file(UID):
+    return f"{USER_PATH}UID{UID}/orderplaced.db"
+
+
 def user_image(UID):
     return f"{USER_PATH}UID{UID}/profile_pic.png"
 

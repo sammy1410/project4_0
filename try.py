@@ -12,9 +12,9 @@ def timecode():
     return code
 
 def timestamp_int():
-    date_time_str = "2024-03-08 12:30:45"
+    date_time_str = timestamp()
     date_time_obj = datetime.datetime.now().strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
-    print(date_time_obj)
-    return date_time_obj
+    print(date_time_obj.timestamp())
+    return date_time_obj.timestamp()
 
-timestamp_int().year
+new = timestamp_int()

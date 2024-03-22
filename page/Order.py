@@ -1,13 +1,9 @@
 import streamlit as st
-from utility.shared import this
+from utility.shared import this,change_page
 from utility.fileHandler import ORDER_DB
 from utility.fileHandler import USER_DB,user_events_file,user_orders_file
 from utility.databaseHandler import showOrders
 import os
-
-
-def pagechange():
-    this.pageName="Home"
 
 def checkout():
      st.success("The order has been placed successfully")
@@ -27,7 +23,7 @@ def layout():
                 
         else:
             st.title("There are no order placed.")
-            st.button("Continue looking for product",on_click=pagechange)
+            st.button("Continue looking for product",on_click=change_page,args=("Home",))
         
 
     

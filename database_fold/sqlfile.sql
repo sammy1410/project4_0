@@ -1,8 +1,10 @@
 CREATE TABLE product (
     id INTEGER NOT NULL,
-    productname String NOT NULL,
+    name String NOT NULL,
     unitprice INTEGER NOT NULL,
     quantity INTEGER,
+    img_location STRING,
+    description STRING,
     PRIMARY KEY (id)
 );
 
@@ -17,6 +19,9 @@ CREATE TABLE customer(
     access VARCHAR NOT NULL,
     PRIMARY KEY (email)
 );
+
+INSERT INTO product(id,name,unitprice,quantity) VALUES
+(1542,"ashtray",450,6);
 
 INSERT INTO [customer]([id],[firstname],[lastname],[gender],[email],[password],[phone],[access])VALUES
 (1,"Sameer","Timsina","Male","sammy","pass","98456548","admin"),

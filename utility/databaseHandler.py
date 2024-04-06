@@ -1,10 +1,9 @@
 from utility.fileHandler import PRODUCT_DB, PRODUCT_PATH, PRODUCT_NO
 from utility.fileHandler import USER_PATH,USER_DB,USER_NO,user_orders_file,ORDER_DB,user_orderplaced_file
 from utility.fileHandler import TMP_PATH
-from utility.shared import this
+from utility.shared import this,change_page
 import pickle,shutil
 import streamlit as st
-import os
 
    
 def totalUsers():
@@ -17,16 +16,11 @@ def totalProducts():
         products = int(file.read())
         return products
     
- 
-def change_page(page):
-    this.pageName=page
-    print(f"Change Page: {this.pageName}")
-
 def removeUser():
     if this.del_user == None:
         print("User Selected None")
         return
-    old_file = open(USER_DB, 'rb')
+    old_file = open(USER_DB, "rb")
     temp_file = open(f'{TMP_PATH}userTemp.db',"wb")
     i=0
     while True:
@@ -52,18 +46,21 @@ def removeUser():
             old_file.close()
             shutil.move(f"{TMP_PATH}userTemp.db",USER_DB)
             break
-        this.del_user=None
+
+    this.del_user=None
 
 def removeProduct():
+
     if this.del_product == None:
         print("Product Selected None")
         return
-    old_file = open(PRODUCT_DB, 'rb')
+    old_file = open(PRODUCT_DB, "rb")
     temp_file = open(f'{TMP_PATH}productTemp.db',"wb")
+    print("Here")
     i=0
     while True:
         try:
-            entry = pickle.load(old_file)
+            entry = pickle.load(old_file)        
             if i == this.del_product:
                 id = entry["ID"]
                 print(f"Removing '{PRODUCT_PATH}PID{id}'")
@@ -83,7 +80,8 @@ def removeProduct():
             old_file.close()
             shutil.move(f"{TMP_PATH}productTemp.db",PRODUCT_DB)
             break
-        this.del_product=None
+    this.del_product=None
+
 
 def showUsers():
     table = list()

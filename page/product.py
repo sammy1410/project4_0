@@ -4,8 +4,6 @@ from utility.fileHandler import USER_DB,user_events_file,user_orders_file
 from utility.fileHandler import PRODUCT_DB,PRODUCT_PATH,product_info,product_image,product_data
 from utility.shared import this
 from utility.timestamp import timestamp,timecode,timeorder,earliestdelivery
-import os
-
 import pickle
 
 product_entry = None
@@ -14,14 +12,15 @@ def sendOrder(qty):
     global product_entry
     try:
         with open(user_orders_file(this.user_session["ID"]),"ab") as order_database:
-           order_data = { 
+            order_data = { 
                     "Name":product_entry["Name"],
                     "Quantity":qty,
                     "Time of Order":timeorder(),
                     "Earliest Delivery Time":earliestdelivery(),
                     "Status":"Added to cart"
             }
-           pickle.dump(order_data,order_database)           
+            pickle.dump(order_data,order_database)
+            print("Done?")            
     except:
         st.error("sorry order cannot be placed")
     this.pageName="Home"

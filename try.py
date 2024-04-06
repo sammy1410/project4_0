@@ -1,34 +1,20 @@
-import streamlit as st
-import pandas as pd
+import time 
+import datetime
 
-# Function to simulate database operations
-def store_order(order_data):
-    # Simulate storing order data in a database
-    st.write("Storing order data:", order_data)
+def timestamp():
+    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-# Sample initial order data
-order_data = {
-    'Order ID': '123',
-    'Product': 'Product A',
-    'Quantity': 2,
-    'Status': 'Added to Cart'
-}
+def timecode():
+    current_time_seconds = int(time.time())
+    print(current_time_seconds)
+    code = current_time_seconds % 100000000
+    print(code)
+    return code
 
-# Display initial order data
-st.write("Order Details:")
-st.write(pd.DataFrame([order_data]))
+def timestamp_int():
+    date_time_str = "2024-03-08 12:30:45"
+    date_time_obj = datetime.datetime.now().strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
+    print(date_time_obj)
+    return date_time_obj
 
-# Button to proceed to checkout
-if st.button("Proceed to Checkout"):
-    # Update order status
-    order_data['Status'] = 'Order Placed'
-
-    # Store updated order data
-    store_order(order_data)
-
-    # Display updated order data
-    st.write("Order Details (Updated):")
-    st.write(pd.DataFrame([order_data]))
-        
-
-    
+timestamp_int().year

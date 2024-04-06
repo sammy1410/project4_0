@@ -1,14 +1,10 @@
 import streamlit as st
-from utility.shared import this
+from utility.shared import this,change_page
 from utility.fileHandler import ORDER_DB
 from utility.fileHandler import USER_DB,user_events_file,user_orders_file,user_orderplaced_file
 from utility.databaseHandler import showOrders,showOrderplaced
 import os
 import pickle
-
-
-def pagechange():
-    this.pageName="Home"
 
 def checkout():
      st.success("The order has been placed successfully")
@@ -50,12 +46,17 @@ def layout():
                 #st.button("Continue looking for product",on_click=pagechange)
                 #print("this module is running.")
         else:
+<<<<<<< HEAD
             st.title("There are no product added to cart.")
             st.button("Continue looking for product",on_click=pagechange)
         if os.path.getsize(user_orderplaced_file(this.user_session["ID"])) > 0:
             showOrderplaced()
 
         
+=======
+            st.title("There are no order placed.")
+            st.button("Continue looking for product",on_click=change_page,args=("Home",))
+>>>>>>> b8175dfab21fa37e3a2b6a6c66b0a4d3c14914f3
         
 
     

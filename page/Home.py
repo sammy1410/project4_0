@@ -1,16 +1,14 @@
 import streamlit as st
 import pickle
-from utility.shared import this
+from utility.shared import this,file_name,change_page
 from utility.shared import file_name
 
 from utility.fileHandler import PRODUCT_DB,PRODUCT_PATH,product_image,product_info
 
 def product_select(productid):
     this.productID= productid
-    this.pageName="Product"
-    print(f"Change Page: {this.pageName}")
-    pass
-
+    change_page("Product")
+    
 def layout():
     col_1,col_2 = st.columns(2)
     i=1

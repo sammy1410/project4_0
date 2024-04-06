@@ -3,6 +3,10 @@ import time
 
 this = st.session_state
 
+def change_page(page):
+    this.pageName=page
+    print(f"Change Page: {this.pageName}")
+
 def file_name(file):
     dot_index = file.rfind(".")
     

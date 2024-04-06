@@ -1,8 +1,5 @@
 import streamlit as st
 from utility.shared import this,change_page
-from utility.fileHandler import ORDER_DB
-from utility.fileHandler import USER_DB,user_events_file,user_orders_file
-from utility.databaseHandler import showOrders
 import os
 
 def checkout():

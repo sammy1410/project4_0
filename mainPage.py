@@ -1,6 +1,4 @@
 from utility.shared import this
-import os
-from utility.fileHandler import user_orders_file
 import streamlit as st
 import page.Contact_us as Contact,page.Home as Home, page.product as product,page.SCADA as SCADA
 import page.SignIn as SignIn,page.SignUp as SignUp
@@ -20,7 +18,7 @@ admin_pages = {
     "SCADA": SCADA,
     "My Account": accountInfo,
     "New_Product":New_Product,
-    #"New_User":New_User
+    "New_User":New_User
 }
 
 user_pages = {
@@ -100,7 +98,7 @@ if "page" not in this:
     this.page.layout()
 else:
     if "user_session" in this:
-        if this.user_session["access"] == "Admin":
+        if this.user_session.access == "admin":
             if this.pageName != "SCADA":
                 showAdminNavMenu()
             #this.page = admin_pages[this.pageName]

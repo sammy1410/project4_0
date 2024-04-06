@@ -1,78 +1,44 @@
 import streamlit as st
 from utility.shared import this
-import pickle
-import os
-import shutil
 from utility.timestamp import timestamp,timecode
-from utility.fileHandler import USER_DB,DB_PATH,user_events_file,user_orders_file,user_image
-from utility.fileHandler import USER_NO,USER_PATH
+from database_fold.databaseHandler import customerEntryExists,addCustomer
+from utility.fileHandler import customer_dp
 
 def validateNewUser():
     print(f"""New User Entry: {this.email_signup}""")
-    user_exists = False
-    
-    with open(USER_DB,"rb") as file:
-        while True:
-            try:
-                entry = pickle.load(file)
-                if entry["email"] == this.email_signup:
-                    user_exists = True
-            except EOFError:
-                break
-    if not user_exists:
-        with open(USER_DB,"ab") as file:
-            with open(f"{USER_NO}","r") as userCount:
-                this.userCount = int(userCount.readline())
-            this.userCount += 1
-            with open(f"{USER_NO}","w") as userCount:
-                userCount.write(str(this.userCount))
-            user_data = {
-                "ID": timecode(),
-                "first_name": this.firstname_signup,
-                "last_name": this.lastname_signup,
+
+    if not customerEntryExists(this.email_signup):
+        customer_data = {
+                "id": timecode(),
+                "firstname": this.firstname_signup,
+                "lastname": this.lastname_signup,
                 "gender": this.gender_signup,
                 "email": this.email_signup,
                 "phone": this.phone_signup,
-                "pass": this.pass_signup,
+                "password": this.pass_signup,
                 "access": this.access_signup
             }
-            pickle.dump(user_data,file)
-            os.makedirs(f"{USER_PATH}UID{user_data['ID']}")
-            
-            with open(user_events_file(user_data["ID"]),"w") as file:
-                file.write(f"""
-                    User Created: {timestamp()}
-                    UID: {user_data['ID']}
-                    User Name: {user_data['first_name']} {user_data['last_name']}
-                """)
-            
-            with open(user_orders_file(user_data["ID"]),"w") as file:
-                pass
+        
+        try:
+            addCustomer(customer_data)
+        except:
+            return False
 
-            if this.profile_signup is not None:
-                with open(user_image(user_data["ID"]),"wb") as profile_img:
+        if this.profile_signup is not None:
+                with open(customer_dp(customer_data["id"]),"wb") as profile_img:
                     profile_img.write(this.profile_signup.read())
-            else:
-                if this.gender_signup == "Female":
-                    from utility.fileHandler import default_female
-                    shutil.copy(default_female,f'{user_image(user_data["ID"])}')
-                else:
-                    from utility.fileHandler import default_male
-                    shutil.copy(default_male,f'{user_image(user_data["ID"])}')
-
-            st.success("User Added! Sign In for more info.")  
-            with st.spinner():
-                #time.sleep(3)
-                del this.userCount
-                del this.firstname_signup
-                del this.lastname_signup
-                del this.email_signup
-                del this.phone_signup
-                del this.gender_signup
-                del this.pass_signup
-                del this.access_signup
-                del this.profile_signup
-            this.pageName="Sign In"
+            
+        st.success("User Added! Sign In for more info.")  
+        with st.spinner():
+            del this.firstname_signup
+            del this.lastname_signup
+            del this.email_signup
+            del this.phone_signup
+            del this.gender_signup
+            del this.pass_signup
+            del this.access_signup
+            del this.profile_signup
+        this.pageName="Sign In"
     else:
         st.error("User Already Exists. Proceed to Sign In.")
 

@@ -6,7 +6,7 @@ if __name__ == "__main__":
 else:
     from database_fold.model import Customer, Product,session,session_local
 
-def getUserdata(_email):
+def getCustomerdata(_email):
     return (
         session.query(
             Customer
@@ -26,13 +26,16 @@ def customerslimited(no):
         ).limit(no).all()
     )
 
-def addUser(data):
+def addCustomer(data):
     new = insert(Customer).values(data)
+    try:
+        session.execute(new)
+        session.commit()
+        return True
+    except:
+        return False
 
-    session.execute(new)
-    session.commit()
-
-def entryExists(email):
+def customerEntryExists(email):
     exists = session.query(
         session.query(Customer).filter_by(email=email).exists()
     ).scalar()

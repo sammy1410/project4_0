@@ -1,50 +1,20 @@
 from utility.timestamp import timestamp
-import pickle
 
-DB_PATH = "./database/"
+def product_image(id):
+    return f"./database_fold/products/{id}.jpg"
 
-USER_DB = "./database/users.db"
-ORDER_DB = "./database/orders.db"
-PRODUCT_DB = "./database/products.db"
-PRODUCT_NO = "./database/productNo"
-USER_NO = "./database/userNo"
+def product_description(id):
+    return f"./database_fold/description/{id}.txt"
 
-USER_PATH = "./database/users/"
-PRODUCT_PATH = "./database/products/"
-TMP_PATH = "./tmp/"
+def customer_dp(id):
+    return f"./database_fold/products/{id}.jpg"
 
-default_male = "./images/default_boy_profile.png"
-default_female= "./images/default_girl_profile.png"
-default_product= "./images/default_product.png"
+def default_dp(gender):
+    if gender == "Female" or gender == "female":
+        return f"./database_fold/products/default_girl_profile.png"
+    else:
+        return f"./database_fold/products/default_boy_profile.png"
 
-
-def user_events_file(UID):
-    return f"{USER_PATH}UID{UID}/events.log"
-
-def user_orders_file(UID):
-    return f"{USER_PATH}UID{UID}/orders.db"
-
-def user_image(UID):
-    return f"{USER_PATH}UID{UID}/profile_pic.png"
-
-def product_image(PID):
-    return f"{PRODUCT_PATH}PID{PID}/image.jpg"
-
-def product_info(PID):
-    return f"{PRODUCT_PATH}PID{PID}/infoFile"
-
-def product_data(pid):
-    product_entry=None
-    with open(PRODUCT_DB,"rb") as product_db:
-        while True:
-            try:
-                entry= pickle.load(product_db)
-                if entry["ID"] == pid:
-                    product_entry = entry
-                    break
-            except EOFError:
-                break
-    return product_entry
 
 def write_output(mesg):
     with open("./logs/output.log","a") as output_logs:

@@ -1,7 +1,7 @@
 CREATE TABLE product (
     id INTEGER NOT NULL,
     name String NOT NULL,
-    unitprice INTEGER NOT NULL,
+    price INTEGER NOT NULL,
     quantity INTEGER,
     img_location STRING,
     description STRING,
@@ -20,15 +20,15 @@ CREATE TABLE customer(
     PRIMARY KEY (email)
 );
 
-INSERT INTO product(id,name,unitprice,quantity) VALUES
+INSERT INTO product(id,name,price,quantity) VALUES
 (1542,"ashtray",450,6);
 
 INSERT INTO [customer]([id],[firstname],[lastname],[gender],[email],[password],[phone],[access])VALUES
 (1,"Sameer","Timsina","Male","sammy","pass","98456548","admin"),
-(2,"Sneha","Timsina","Female","sneha","pass","4744445","admin");
+(2,"Sneha","Timsina","Female","sneha","pass","4744445","admin"),
+(3,"Sneha","Timsina","Female","samuser","pass","4744445","user");
 
 INSERT INTO customer (id, firstname, lastname, gender, email, password, phone, access) VALUES
-(3, 'Emma', 'Williams', 'Female', 'emma.williams@example.com', 'password321', '789-012-3456', 'user'),
 (4, 'James', 'Brown', 'Male', 'james.brown@example.com', 'pass123word', '012-345-6789', 'admin'),
 (5, 'Sophia', 'Jones', 'Female', 'sophia.jones@example.com', '123password', '234-567-8901', 'user'),
 (6, 'Liam', 'Taylor', 'Male', 'liam.taylor@example.com', 'passwordabc', '345-678-9012', 'admin'),

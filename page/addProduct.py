@@ -17,7 +17,7 @@ def productAdd():
     product_data = {
         "id": product_id,
         "name": this.product_name,
-        "quantity":this.quantity,
+        "quantity":this.qty,
         "price": this.price,
     }
 

@@ -2,9 +2,9 @@ import time
 import RPi.GPIO as GPIO
 import pigpio
 import threading
-from shared import this
+from utility.shared import this
 
-from mathModule import smoothingfunc
+from utility.mathModule import smoothingfunc
     
 def usleep(micro):
     start_time = time.perf_counter()

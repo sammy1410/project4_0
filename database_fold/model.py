@@ -18,11 +18,11 @@ class Product(Base):
     __tablename__ = "product"
     id = Column(Integer,primary_key=True,nullable=False)
     name = Column(String,nullable=False)
-    unitprice = Column(Integer,nullable=False)
+    price = Column(Integer,nullable=False)
     quantity = Column(Integer)
 
     def all(self):
-        return (self.id,self.name,self.unitprice,self.quantity)
+        return (self.id,self.name,self.price,self.quantity)
 
 class Customer(Base):
     __tablename__ = "customer"

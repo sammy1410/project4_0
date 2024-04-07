@@ -49,10 +49,14 @@ def productEntryExists(_id):
     )
 
 def addProduct(data):
-    add = insert(Product).values(data)
+    try:
+        add = insert(Product).values(data)
 
-    session.execute(add)
-    session.commit()
+        session.execute(add)
+        session.commit()
+        return True
+    except:
+        return False
 
 def productAll():
     return(

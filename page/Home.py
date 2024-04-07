@@ -18,9 +18,9 @@ def layout():
             with col_1:
                 st.image(product_image(product.id)) 
                 st.write(str(product.name).upper())             
-                st.button("Buy", on_click=product_select, args=(product.id,))
+                st.button("Buy", on_click=product_select, args=(product.id,),key=product.id)
         else:
             with col_2:
                 st.image(product_image(product.id)) 
                 st.write(str(product.name).upper())             
-                st.button("Buy", on_click=product_select, args=(product.id,))
+                st.button("Buy", on_click=product_select, args=(product.id,),key=product.id)

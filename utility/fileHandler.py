@@ -7,13 +7,13 @@ def product_description(id):
     return f"./database_fold/description/{id}.txt"
 
 def customer_dp(id):
-    return f"./database_fold/products/{id}.jpg"
+    return f"./database_fold/customers/{id}.jpg"
 
 def default_dp(gender):
     if gender == "Female" or gender == "female":
-        return f"./database_fold/products/default_girl_profile.png"
+        return f"./database_fold/customers/default_girl_profile.png"
     else:
-        return f"./database_fold/products/default_boy_profile.png"
+        return f"./database_fold/customers/default_boy_profile.png"
 
 
 def write_output(mesg):

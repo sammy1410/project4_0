@@ -55,6 +55,7 @@ def showAdminNavMenu():
     page_name=list(admin_pages.keys())
     page_name.remove("Product")
     page_name.remove("New_Product")
+    page_name.remove("New_User")
 
     pageNo = len(page_name)
     columns = st.columns(pageNo)
